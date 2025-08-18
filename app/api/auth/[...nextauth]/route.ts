@@ -4,6 +4,7 @@ import GoogleProvider from "next-auth/providers/google";
 //for now we are using the signup and signnin with google only
 
 const handler = NextAuth({
+  
     providers: [
         GoogleProvider({
             //if not found its empty
@@ -11,6 +12,7 @@ const handler = NextAuth({
           clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? ""
         })
       ]
+      
 })
-
+console.log( "here it is" ,process.env.GOOGLE_CLIENT_ID ,process.env.GOOGLE_CLIENT_SECRET)
 export {handler as POST, handler as GET}
