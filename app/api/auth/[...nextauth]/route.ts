@@ -1,3 +1,5 @@
+import db from "@/app/db";
+import { Keypair } from "@solana/web3.js";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
@@ -20,7 +22,37 @@ const handler = NextAuth({
             if(!email) {
               return false; 
             }
-            return true; 
+            const userdb =await db.user.findFirst({
+              where: {
+                username: email,
+              },
+            })
+            if(userdb) {
+              return true;
+            }
+            const keypair = Keypair.generate();
+            const publicKey = keypair.publicKey.toBase58();
+            const privateKey = keypair.secretKey;
+            await db.user.create({
+              data: {
+                username : email,
+                provider : "Google",
+                name : profile?.name ?? "",
+                // @ts-ignore
+                profilePic : profile?.picture,
+                solWallet : {
+                  create :{
+                    publicKey : publicKey,
+                    privateKey : privateKey.toString(),
+                  }
+                },
+                nprWallet : {
+                  create : {
+                    balance : 0,
+                  }
+                }
+              }
+            })
           }
           return false
         },

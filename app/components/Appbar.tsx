@@ -18,7 +18,7 @@ export const Appbar = () => {
                         Logout
                         </PrimaryButton> :  <PrimaryButton 
                     onClick={
-                        () => signIn()
+                        () => signIn("google")
                     }>
                         SignIn
                         </PrimaryButton>

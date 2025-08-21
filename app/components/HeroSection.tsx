@@ -25,7 +25,7 @@ export const Hero = () => {
                 Convert your NPR into Cryptocurrency
             </div>
            { session?.data?.user? <div className="pt-5 flex justify-center">
-                <SecondaryButton onClick={() => router.push("/dashboard") }>Go to Dashboard</SecondaryButton>
+                <SecondaryButton onClick={() => router.push("dashboard") }>Go to Dashboard</SecondaryButton>
             </div> :
             <div className="pt-5 flex justify-center">
             <SecondaryButton onClick={() => signIn("google")}>Login With Google </SecondaryButton>
