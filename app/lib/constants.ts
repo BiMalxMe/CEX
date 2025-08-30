@@ -67,7 +67,7 @@ function isValidAddress(address: string): boolean {
   }
 }
 
-// ✅ get balance for SOL + SPL tokens
+//  get balance for SOL + SPL tokens
 export async function getAccountBalance(
   token: TokenDetails,
   ownerAddress: string
@@ -131,5 +131,5 @@ export async function getSupportedTokens(address?: string) {
   );
 }
 
-// ✅ test run with no wallet
+//  test run with no wallet
 getSupportedTokens().then((tokens) => console.log("Tokens:", tokens));

@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const address = searchParams.get("address");
 
-  // ✅ if no address provided, just return tokens with price info
+  // if no address provided, just return tokens with price info
   if (!address || !isValidAddress(address)) {
     const supportedTokens = await getSupportedTokens();
     return NextResponse.json({
@@ -43,7 +43,7 @@ export async function GET(req: NextRequest) {
   });
 }
 
-// ✅ helper: check if address is valid
+//  helper: check if address is valid
 function isValidAddress(address: string): boolean {
   try {
     new PublicKey(address);
