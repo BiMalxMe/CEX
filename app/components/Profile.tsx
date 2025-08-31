@@ -2,12 +2,17 @@
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { PrimaryButton } from "./Button";
+import { PrimaryButton, TabButton } from "./Button";
 import { useEffect, useState } from "react";
 import { useTokens } from "../api/hooks/useTokens";
 import { TokenLists } from "./TokenLists";
 
+
+type Tab  = "tokens" | "swap" | "send" | "withdraw" | "add_funds";
+const  tabs : Tab[] = ["tokens", "swap", "send", "withdraw", "add_funds"];
+
 export default function Profile({ publicKey }: { publicKey?: string }) {
+  const [selectedTab,setSeclectedTab] = useState<Tab>("tokens");
   const router = useRouter();
   const session = useSession();
 
@@ -28,12 +33,19 @@ export default function Profile({ publicKey }: { publicKey?: string }) {
 
   return (
     <div className="pt-8 flex items-center justify-center">
-      <div className="w-full max-w-2xl bg-white shadow-lg rounded-2xl p-8">
+      <div className="w-full max-w-2xl bg-white shadow-lg rounded-2xl p-8 ">
         <Greeting
           name={session?.data?.user?.name ?? ""}
           imageurl={session?.data?.user?.image ?? ""}
         />
-        <Assets publicKey={publicKey} />
+        <div className="w-full flex">
+        {tabs.map((tab) => (
+          <TabButton onClick={() => setSeclectedTab(tab)} active={selectedTab === tab} key={tab}>
+            {tab.charAt(0).toUpperCase() + tab.slice(1).replace("_", " ")}
+          </TabButton>))}
+          </div>
+        {selectedTab === "tokens" && <Assets publicKey={publicKey} />}
+    
       </div>
     </div>
   );
