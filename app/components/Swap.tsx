@@ -27,11 +27,13 @@ export function Swap({publicKey, tokenBalances }: {
         }
         setFetchingQuote(true);
         axios.get(`https://quote-api.jup.ag/v6/quote?inputMint=${baseAsset.mint}&outputMint=${quoteAsset.mint}&amount=${Number(baseAmount) * (10 ** baseAsset.decimals)}&slippageBps=50`)
-            .then(res => {
-                setQuoteAmount((Number(res.data.outAmount) / Number(10 ** quoteAsset.decimals)).toString())
-                setFetchingQuote(false);
-                setQuoteResponse(res.data);
-            })
+        .then(res => {
+            setQuoteAmount((Number(res.data.outAmount) / Number(10 ** quoteAsset.decimals)).toString())
+            setFetchingQuote(false);
+            setQuoteResponse(res.data);
+        })
+        .catch(() => setFetchingQuote(false));
+      
     }, [baseAsset, quoteAsset, baseAmount])
 
     return <div className="p-12 bg-slate-50">

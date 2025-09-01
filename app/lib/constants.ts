@@ -16,7 +16,7 @@ let prices: { [key: string]: { usdPrice: number } } = {};
 const TOKEN_PRICE_REFRESH_INTERVAL = 60 * 1000; // every 60s
 
 export const connection = new Connection(
-  "https://solana-devnet.g.alchemy.com/v2/u-HGjUk-M9HMphshm3_KH"
+  "https://mainnet.helius-rpc.com/?api-key=4a7f200a-f03a-420a-840e-fb37d981c2bf"
 );
 
 // ✅ validate address
