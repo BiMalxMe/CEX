@@ -7,9 +7,11 @@ import { useEffect, useState } from "react";
 import { tokenbalanceprops, useTokens } from "../api/hooks/useTokens";
 import { TokenLists } from "./TokenLists";
 import { Swap } from "./Swap";
+import  { Withdraw } from "./Withdraw";
+import AddFund from "./AddFund";
 
-type Tab = "tokens" | "swap" | "send" | "withdraw" | "add_funds";
-const tabs: Tab[] = ["tokens", "swap", "send", "withdraw", "add_funds"];
+type Tab = "tokens" | "swap" | "withdraw" | "add_funds";
+const tabs: Tab[] = ["tokens", "swap", "withdraw", "add_funds"];
 
 export default function Profile({ publicKey }: { publicKey?: string }) {
   const { tokenBalances, loading } = useTokens(publicKey ?? "");
@@ -33,9 +35,9 @@ export default function Profile({ publicKey }: { publicKey?: string }) {
   }
 
   // If no balances yet, return safely
-  if (!tokenBalances) {
-    return null;
-  }
+  // if (!tokenBalances) {
+  //   return null;
+  // }
 
   return (
     <div className="pt-8 flex items-center justify-center">
@@ -63,6 +65,8 @@ export default function Profile({ publicKey }: { publicKey?: string }) {
           />
         )}
         {selectedTab === "swap" && <Swap tokenBalances={tokenBalances} publicKey={publicKey}/>}
+        {selectedTab === "withdraw" && <Withdraw tokenBalances={tokenBalances} publicKey={publicKey} />}
+        {selectedTab === "add_funds" && <AddFund/>}
       </div>
     </div>
   );

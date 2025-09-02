@@ -19,7 +19,7 @@ export const connection = new Connection(
   "https://mainnet.helius-rpc.com/?api-key=4a7f200a-f03a-420a-840e-fb37d981c2bf"
 );
 
-// ✅ validate address
+//  validate address
 function isValidAddress(address: string): boolean {
   try {
     new PublicKey(address);
