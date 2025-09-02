@@ -8,14 +8,14 @@ interface TimeLeft {
   seconds: number;
 }
 
-const App: React.FC = () => {
-  const TOTAL_HOURS = 20 * 365 * 24;
-  const now = new Date();
-  const targetDate = new Date(now.getTime() + TOTAL_HOURS * 60 * 60 * 1000);
+const Countdown2030: React.FC = () => {
+  const targetDate = new Date("2030-01-01T00:00:00");
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft());
 
   function calculateTimeLeft(): TimeLeft {
-    const difference = targetDate.getTime() - new Date().getTime();
+    const now = new Date();
+    const difference = targetDate.getTime() - now.getTime();
+
     if (difference <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
 
     return {
@@ -44,15 +44,13 @@ const App: React.FC = () => {
   );
 
   return (
-    <div className="flex flex-col items-center justify-center p-6 ">
-      <div className="p-6 rounded-2xl flex flex-col items-center gap-4 max-w-sm">
+    <div className="flex flex-col items-center justify-center p-6">
+      <div className="p-6 rounded-2xl flex flex-col items-center gap-4 max-w-sm bg-white/80 backdrop-blur-md shadow-lg">
         <h1 className="text-xl font-bold flex items-center gap-2 text-gray-800">
           <Clock className="w-6 h-6 text-teal-500" />
-          This feature will be available 
+          This feature will be available
         </h1>
-        <p className="text-center text-sm text-gray-500">
-          Your deposited funds will be available in {TOTAL_HOURS.toLocaleString()} hours
-        </p>
+     
         <div className="flex justify-center flex-wrap mt-2">
           {timerComponents.length ? timerComponents : <span className="text-sm text-red-500">Time's up!</span>}
         </div>
@@ -61,4 +59,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default Countdown2030;
